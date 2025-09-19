@@ -46,11 +46,23 @@ export const DatasetTestRunner: React.FC<DatasetTestRunnerProps> = ({
     try {
       // Strip TypeScript type annotations
       const jsCode = code
+        // Remove type definitions: type Name = {...}
+        .replace(/type\s+\w+\s*=\s*\{[^}]*\}\s*;?\s*/g, '')
+        // Remove interface definitions: interface Name {...}
+        .replace(/interface\s+\w+\s*\{[^}]*\}\s*/g, '')
+        // Remove parameter type annotations: (param: Type) -> (param)
         .replace(/\(\s*([^)]+)\s*:\s*[^)]+\s*\)/g, '($1)')
+        // Remove return type annotations: ): Type { -> ) {
         .replace(/\):\s*[^{]+\{/g, ') {')
+        // Remove type annotations from parameters: param: Type -> param
         .replace(/(\w+)\s*:\s*[^,)]+/g, '$1')
+        // Remove optional parameter markers: param? -> param
         .replace(/(\w+)\?\s*/g, '$1 ')
-        .replace(/\s+/g, ' ');
+        // Remove remaining TypeScript keywords
+        .replace(/\b(readonly|public|private|protected)\s+/g, '')
+        // Clean up any remaining artifacts and extra whitespace
+        .replace(/\s+/g, ' ')
+        .trim();
 
       // Check if this is an aggregation function (takes array as input)
       const isAgg = code.includes('Array<') || code.includes('[]');

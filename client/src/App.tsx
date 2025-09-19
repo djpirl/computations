@@ -69,6 +69,10 @@ function App() {
       
       // Strip TypeScript type annotations to make it valid JavaScript
       const jsCode = code
+        // Remove type definitions: type Name = {...}
+        .replace(/type\s+\w+\s*=\s*\{[^}]*\}\s*;?\s*/g, '')
+        // Remove interface definitions: interface Name {...}
+        .replace(/interface\s+\w+\s*\{[^}]*\}\s*/g, '')
         // Remove parameter type annotations: (param: Type) -> (param)
         .replace(/\(\s*([^)]+)\s*:\s*[^)]+\s*\)/g, '($1)')
         // Remove return type annotations: ): Type { -> ) {
@@ -77,8 +81,11 @@ function App() {
         .replace(/(\w+)\s*:\s*[^,)]+/g, '$1')
         // Remove optional parameter markers: param? -> param
         .replace(/(\w+)\?\s*/g, '$1 ')
-        // Clean up any remaining artifacts
-        .replace(/\s+/g, ' ');
+        // Remove remaining TypeScript keywords
+        .replace(/\b(readonly|public|private|protected)\s+/g, '')
+        // Clean up any remaining artifacts and extra whitespace
+        .replace(/\s+/g, ' ')
+        .trim();
       
       // Create a safe execution environment
       const executionCode = `
