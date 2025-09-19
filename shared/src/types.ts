@@ -25,3 +25,19 @@ export interface SavedFunction {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface TableSchema {
+  columns: Array<{
+    name: string;
+    type: 'string' | 'number' | 'boolean' | 'date';
+  }>;
+}
+
+export interface DatasetInfo {
+  name: string;
+  path: string;
+  category: string;
+  rowCount: number;
+  schema: TableSchema;
+  sample: any[];
+}

@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { generateRouter } from './routes/generate';
+import { datasetsRouter } from './routes/datasets';
 
 dotenv.config({ path: path.join(__dirname, '../../.env') });
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api', generateRouter);
+app.use('/api', datasetsRouter);
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });

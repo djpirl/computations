@@ -13,15 +13,29 @@ export class ClaudeService {
   }
 
   async generateFunction(prompt: string, context?: any): Promise<GenerateResponse> {
-    const systemPrompt = `You are an expert TypeScript developer generating data transformation functions.
+    // Build context-aware system prompt
+    let contextDetails = '';
+    if (context?.schema) {
+      contextDetails += '\nAvailable fields in the dataset:\n';
+      for (const [field, type] of Object.entries(context.schema)) {
+        contextDetails += `- ${field}: ${type}\n`;
+      }
+    }
+    if (context?.sampleData && context.sampleData.length > 0) {
+      contextDetails += '\nSample data row:\n';
+      contextDetails += JSON.stringify(context.sampleData[0], null, 2);
+    }
 
+    const systemPrompt = `You are an expert TypeScript developer generating data transformation functions.
+${contextDetails}
 Requirements:
 - Generate pure TypeScript functions only
 - Include proper type annotations
 - Handle edge cases gracefully (null, undefined, empty values)
 - Return single values or objects
 - No side effects or external dependencies
-- Function should be for single table row-level computations only
+- Function should work with the provided dataset structure when context is available
+- Support both single-row transformations and aggregations over arrays
 
 IMPORTANT: Respond with ONLY valid JSON. Do not include any markdown formatting, explanations, or code blocks.
 

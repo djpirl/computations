@@ -1,8 +1,11 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { PromptInput } from './components/PromptInput';
-import { CodeDisplay } from './components/CodeDisplay';
-import { TestCasesTable } from './components/TestCasesTable';
-import { GenerateResponse, TestCase } from '../../shared/src/types';
+import { TabNavigation, TabType } from './components/tabs/TabNavigation';
+import { ComputationTab } from './components/tabs/ComputationTab';
+import { DataViewerTab } from './components/tabs/DataViewerTab';
+import { GenerateResponse, TestCase, DatasetInfo } from '../../shared/src/types';
+import './styles/DatasetSelector.css';
+import './styles/DatasetTestRunner.css';
+import './styles/DataViewer.css';
 
 function App() {
   const [result, setResult] = useState<GenerateResponse | null>(null);
@@ -10,16 +13,31 @@ function App() {
   const [currentCode, setCurrentCode] = useState<string>('');
   const [currentTestCases, setCurrentTestCases] = useState<TestCase[]>([]);
   const [actualResults, setActualResults] = useState<any[]>([]);
+  const [selectedDataset, setSelectedDataset] = useState<DatasetInfo | null>(null);
+  const [activeTab, setActiveTab] = useState<TabType>('computation');
 
   const handleGenerate = async (prompt: string) => {
     setLoading(true);
     try {
+      const requestBody: any = { prompt };
+
+      // Include dataset context if selected
+      if (selectedDataset) {
+        requestBody.context = {
+          schema: selectedDataset.schema.columns.reduce((acc, col) => {
+            acc[col.name] = col.type;
+            return acc;
+          }, {} as Record<string, string>),
+          sampleData: selectedDataset.sample
+        };
+      }
+
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
@@ -128,27 +146,35 @@ function App() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-1">
-            <PromptInput onGenerate={handleGenerate} loading={loading} />
-          </div>
-          
-          <div className="lg:col-span-2 space-y-8">
-            {result && (
-              <>
-                <CodeDisplay 
-                  code={currentCode} 
-                  functionName={result.functionName}
-                  onCodeChange={handleCodeChange}
-                />
-                <TestCasesTable 
-                  testCases={currentTestCases} 
-                  actualResults={actualResults}
-                  onTestCaseChange={handleTestCaseChange}
-                />
-              </>
-            )}
-          </div>
+        <TabNavigation
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
+
+        <div className="tab-content">
+          {activeTab === 'computation' && (
+            <ComputationTab
+              result={result}
+              loading={loading}
+              currentCode={currentCode}
+              currentTestCases={currentTestCases}
+              actualResults={actualResults}
+              selectedDataset={selectedDataset}
+              onGenerate={handleGenerate}
+              onCodeChange={handleCodeChange}
+              onTestCaseChange={handleTestCaseChange}
+              onDatasetSelect={setSelectedDataset}
+            />
+          )}
+
+          {activeTab === 'dataViewer' && (
+            <DataViewerTab
+              selectedDataset={selectedDataset}
+              onDatasetSelect={setSelectedDataset}
+              generatedCode={currentCode}
+              functionName={result?.functionName}
+            />
+          )}
         </div>
       </main>
     </div>

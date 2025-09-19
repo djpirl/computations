@@ -1,0 +1,108 @@
+.dataset-test-runner {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 20px;
+}
+
+.dataset-info-bar {
+  display: flex;
+  gap: 24px;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  border: 1px solid #e9ecef;
+}
+
+.dataset-info-bar span {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.dataset-info-bar strong {
+  color: #343a40;
+  font-weight: 600;
+}
+
+.results-table {
+  width: 100%;
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.results-table th {
+  background: #f1f3f5;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.results-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.results-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.results-table pre {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #495057;
+  max-width: 400px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.aggregation-results h4,
+.transformation-results h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #343a40;
+  margin-bottom: 12px;
+}
+
+.aggregation-results pre {
+  background: white;
+  padding: 16px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #495057;
+  overflow-x: auto;
+}
+
+.dataset-test-runner.loading,
+.dataset-test-runner.error {
+  text-align: center;
+  padding: 32px;
+}
+
+.error-message {
+  color: #dc3545;
+  margin-bottom: 16px;
+}
+
+.dataset-test-runner button {
+  padding: 8px 16px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dataset-test-runner button:hover {
+  background: #0056b3;
+}
