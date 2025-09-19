@@ -4,9 +4,10 @@ import Editor from '@monaco-editor/react';
 interface CodeDisplayProps {
   code: string;
   functionName: string;
+  onCodeChange: (newCode: string) => void;
 }
 
-export const CodeDisplay: React.FC<CodeDisplayProps> = ({ code, functionName }) => {
+export const CodeDisplay: React.FC<CodeDisplayProps> = ({ code, functionName, onCodeChange }) => {
   return (
     <div className="bg-white rounded-lg shadow">
       <div className="px-6 py-4 border-b border-gray-200">
@@ -20,8 +21,9 @@ export const CodeDisplay: React.FC<CodeDisplayProps> = ({ code, functionName }) 
             height="300px"
             language="typescript"
             value={code}
+            onChange={(value) => onCodeChange(value || '')}
             options={{
-              readOnly: true,
+              readOnly: false,
               minimap: { enabled: false },
               scrollBeyondLastLine: false,
               fontSize: 14,
@@ -30,7 +32,8 @@ export const CodeDisplay: React.FC<CodeDisplayProps> = ({ code, functionName }) 
               scrollbar: {
                 vertical: 'visible',
                 horizontal: 'visible'
-              }
+              },
+              automaticLayout: true
             }}
             theme="vs"
           />

@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { PromptInput } from './components/PromptInput';
 import { CodeDisplay } from './components/CodeDisplay';
 import { TestCasesTable } from './components/TestCasesTable';
-import { GenerateResponse } from '../../shared/src/types';
+import { GenerateResponse, TestCase } from '../../shared/src/types';
 
 function App() {
   const [result, setResult] = useState<GenerateResponse | null>(null);
   const [loading, setLoading] = useState(false);
+  const [currentCode, setCurrentCode] = useState<string>('');
+  const [currentTestCases, setCurrentTestCases] = useState<TestCase[]>([]);
+  const [actualResults, setActualResults] = useState<any[]>([]);
 
   const handleGenerate = async (prompt: string) => {
     setLoading(true);
@@ -25,12 +28,89 @@ function App() {
 
       const data: GenerateResponse = await response.json();
       setResult(data);
+      setCurrentCode(data.code);
+      setCurrentTestCases(data.testCases);
+      setActualResults([]);
     } catch (error) {
       console.error('Error:', error);
     } finally {
       setLoading(false);
     }
   };
+
+  const executeFunction = useCallback((code: string, testCases: TestCase[]) => {
+    try {
+      // Extract function name from the code
+      const functionNameMatch = code.match(/function\s+(\w+)\s*\(/);
+      if (!functionNameMatch) {
+        setActualResults(testCases.map(() => ({ error: 'Could not find function name' })));
+        return;
+      }
+      
+      const functionName = functionNameMatch[1];
+      
+      // Strip TypeScript type annotations to make it valid JavaScript
+      const jsCode = code
+        // Remove parameter type annotations: (param: Type) -> (param)
+        .replace(/\(\s*([^)]+)\s*:\s*[^)]+\s*\)/g, '($1)')
+        // Remove return type annotations: ): Type { -> ) {
+        .replace(/\):\s*[^{]+\{/g, ') {')
+        // Remove type annotations from parameters: param: Type -> param
+        .replace(/(\w+)\s*:\s*[^,)]+/g, '$1')
+        // Remove optional parameter markers: param? -> param
+        .replace(/(\w+)\?\s*/g, '$1 ')
+        // Clean up any remaining artifacts
+        .replace(/\s+/g, ' ');
+      
+      // Create a safe execution environment
+      const executionCode = `
+        ${jsCode}
+        return ${functionName};
+      `;
+      
+      const func = new Function(executionCode)();
+      
+      if (typeof func === 'function') {
+        const results = testCases.map(testCase => {
+          try {
+            const result = func(testCase.input);
+            return result;
+          } catch (error) {
+            return { error: error.message };
+          }
+        });
+        setActualResults(results);
+      } else {
+        setActualResults(testCases.map(() => ({ error: 'Function not found' })));
+      }
+    } catch (error) {
+      console.error('Error executing function:', error);
+      setActualResults(testCases.map(() => ({ error: `Execution failed: ${error.message}` })));
+    }
+  }, []);
+
+  // Execute function when code or test cases change
+  useEffect(() => {
+    if (currentCode && currentTestCases.length > 0) {
+      const timeoutId = setTimeout(() => {
+        executeFunction(currentCode, currentTestCases);
+      }, 500); // Debounce execution
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [currentCode, currentTestCases, executeFunction]);
+
+  const handleCodeChange = useCallback((newCode: string) => {
+    setCurrentCode(newCode);
+  }, []);
+
+  const handleTestCaseChange = useCallback((index: number, updatedTestCase: TestCase) => {
+    setCurrentTestCases(prev => {
+      const newTestCases = [...prev];
+      newTestCases[index] = updatedTestCase;
+      return newTestCases;
+    });
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -57,10 +137,15 @@ function App() {
             {result && (
               <>
                 <CodeDisplay 
-                  code={result.code} 
+                  code={currentCode} 
                   functionName={result.functionName}
+                  onCodeChange={handleCodeChange}
                 />
-                <TestCasesTable testCases={result.testCases} />
+                <TestCasesTable 
+                  testCases={currentTestCases} 
+                  actualResults={actualResults}
+                  onTestCaseChange={handleTestCaseChange}
+                />
               </>
             )}
           </div>
