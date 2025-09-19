@@ -23,20 +23,24 @@ Requirements:
 - No side effects or external dependencies
 - Function should be for single table row-level computations only
 
-Response format should be JSON with:
+IMPORTANT: Respond with ONLY valid JSON. Do not include any markdown formatting, explanations, or code blocks.
+
+Response format (valid JSON only):
 {
   "functionName": "descriptiveFunctionName",
-  "code": "complete TypeScript function code",
+  "code": "complete TypeScript function code as a string",
   "testCases": [
-    {"input": {...}, "expectedOutput": ...},
-    // exactly 10 test cases covering edge cases
+    {"input": {"field": "value"}, "expectedOutput": "result"},
+    {"input": {"field": "value"}, "expectedOutput": "result"}
   ]
 }
 
+The "code" field must be a single string containing the complete function. Include exactly 10 test cases.
+CRITICAL: Do NOT use undefined in test cases - use null instead for missing values. All values must be valid JSON.
+
 Examples:
 - "Calculate 20% tax on price" -> function that takes {price: number} and returns number
-- "Format full name" -> function that takes {firstName: string, lastName: string} and returns string
-- "Calculate age from birthdate" -> function that takes {birthDate: string} and returns number`;
+- "Format full name" -> function that takes {firstName: string, lastName: string} and returns string`;
 
     const userPrompt = context 
       ? `Context: ${JSON.stringify(context, null, 2)}\n\nTask: ${prompt}`
@@ -61,18 +65,31 @@ Examples:
         throw new Error('Unexpected response type from Claude');
       }
 
-      let responseText = content.text;
+      let responseText = content.text.trim();
       
-      // Extract JSON from markdown code blocks if present
-      const jsonMatch = responseText.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/);
-      if (jsonMatch) {
-        responseText = jsonMatch[1];
+      // Remove any potential markdown code blocks
+      responseText = responseText.replace(/```json\s*/, '').replace(/```\s*$/, '').trim();
+      
+      // Find the JSON object boundaries
+      const jsonStart = responseText.indexOf('{');
+      const jsonEnd = responseText.lastIndexOf('}');
+      
+      if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
+        responseText = responseText.substring(jsonStart, jsonEnd + 1);
       }
-      
-      // Clean up any remaining markdown artifacts
-      responseText = responseText.replace(/```/g, '').trim();
 
-      const result = JSON.parse(responseText);
+      // Replace undefined with null to make valid JSON
+      responseText = responseText.replace(/:\s*undefined\b/g, ': null');
+
+      let result;
+      try {
+        result = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error('JSON parse error:', parseError);
+        console.error('Response text:', responseText);
+        console.error('Original response:', content.text);
+        throw new Error('Invalid JSON response from Claude');
+      }
       
       return {
         code: result.code,
