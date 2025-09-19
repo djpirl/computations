@@ -1,14 +1,16 @@
 # Natural Language to TypeScript Computation Generator
 
-A local web application that converts natural language descriptions into TypeScript functions with automatic test case generation and preview.
+An interactive web application that converts natural language descriptions into editable TypeScript functions with real-time test execution and live feedback.
 
-## Features
+## ✨ Features
 
 - 🧠 **Natural Language Input**: Describe computations in plain English
-- 🔧 **TypeScript Generation**: Pure functions with proper type annotations  
-- 🧪 **Test Case Preview**: Automatic generation of 10 diverse test cases
-- 💻 **Code Display**: Syntax-highlighted Monaco editor
-- 🎯 **Single Table Focus**: Row-level transformations and calculations
+- 🔧 **Interactive TypeScript Editor**: Editable Monaco editor with syntax highlighting
+- 🧪 **Live Test Execution**: Real-time function testing with pass/fail indicators
+- ✏️ **Editable Test Cases**: Modify inputs and expected outputs with JSON validation
+- ⚡ **Real-time Updates**: Functions execute automatically as you edit code or tests
+- 🎯 **Intelligent Execution**: TypeScript-to-JavaScript conversion for browser compatibility
+- 🔍 **Visual Feedback**: Color-coded test results and error messages
 
 ## Quick Start
 
@@ -50,15 +52,17 @@ A local web application that converts natural language descriptions into TypeScr
    ```
 
    This starts:
-   - Frontend: http://localhost:3000
-   - Backend: http://localhost:3001
+   - Frontend: http://localhost:3001 (auto-detects available port)
+   - Backend: http://localhost:9999
 
-## Usage
+## 🚀 Usage
 
-1. **Enter a natural language prompt** in the input area
-2. **Click "Generate Code"** to create a TypeScript function
-3. **Review the generated code** in the Monaco editor
-4. **Examine test cases** to understand function behavior
+1. **Enter a natural language prompt** describing your desired function
+2. **Click "Generate Code"** to create a TypeScript function with test cases
+3. **Edit the generated code** in the Monaco editor - changes execute automatically
+4. **Modify test cases** - edit inputs and expected outputs in JSON format
+5. **View real-time results** - see pass/fail status and actual outputs immediately
+6. **Iterate and refine** - make changes and see results update in real-time
 
 ### Example Prompts
 
@@ -124,23 +128,29 @@ npm run preview  # Preview production build
 - `POST /api/generate` - Generate TypeScript from natural language
 - `GET /health` - Health check
 
-## Supported Computation Types (Current MVP)
+## 🎯 Current Implementation Status
 
-✅ **Single Table Computations**
-- Row-level transformations
-- Simple calculations
-- String manipulations
-- Date/time operations
+### ✅ **Fully Implemented Features**
+- **Interactive Code Generation**: Natural language → TypeScript functions
+- **Real-time Code Editing**: Monaco editor with TypeScript syntax highlighting
+- **Live Test Execution**: Functions execute as you type with 500ms debouncing
+- **Editable Test Cases**: JSON-validated input/output editing with error feedback
+- **TypeScript Compatibility**: Intelligent type stripping for browser execution
+- **Visual Test Results**: Pass/fail indicators with actual vs expected comparison
+- **Error Handling**: Comprehensive error messages for JSON and execution errors
+- **Development Environment**: Hot-reload setup with client/server separation
 
-🚧 **Coming Soon**
-- Single table aggregations
-- Multi-table computations
-- JSON operations
+### 🚧 **Future Roadmap**
+- **CSV Dataset Integration**: Apply functions to uploaded CSV files
+- **Function Persistence**: Save and load generated functions
+- **Advanced Computations**: Multi-table joins and aggregations
+- **Export Options**: Download functions as standalone TypeScript files
+- **Performance Analytics**: Execution time and memory usage metrics
 
-## Environment Variables
+## 🔧 Environment Variables
 
 - `CLAUDE_API_KEY` - Your Anthropic Claude API key (required)
-- `PORT` - Server port (default: 3001)
+- `PORT` - Server port (default: 9999)
 
 ## Troubleshooting
 
@@ -151,8 +161,9 @@ npm run preview  # Preview production build
    - Restart the server after adding the key
 
 2. **Port conflicts**
-   - Frontend runs on port 3000, backend on 3001
-   - Change ports in `vite.config.ts` and server if needed
+   - Frontend auto-detects available port (usually 3001)
+   - Backend runs on port 9999 by default
+   - Check console output for actual ports being used
 
 3. **Module not found errors**
    - Run `npm install` in root, server, client, and shared directories
@@ -160,9 +171,21 @@ npm run preview  # Preview production build
 
 ### Development Tips
 
-- Use the example prompts to test functionality
-- Check browser console and server logs for errors
-- Shared types must be built before running server/client
+- **Testing Functions**: Use the example prompts to test different scenarios
+- **Debugging**: Check browser console and server logs for detailed error info  
+- **JSON Editing**: Test cases must be valid JSON - watch for red error indicators
+- **Real-time Feedback**: Changes execute automatically after 500ms - no need to manually run
+- **TypeScript vs JavaScript**: Code displays as TypeScript but executes as JavaScript
+- **Shared Types**: Build shared types before running: `cd shared && npm run build`
+
+### 🎉 **What's Working Now**
+
+This project successfully demonstrates:
+- **AI-Powered Code Generation** with Claude API integration
+- **Real-time Interactive Development** with live code execution
+- **Type-Safe Development** with full TypeScript support
+- **Modern Web Architecture** with React, Vite, Express, and Monaco Editor
+- **Robust Error Handling** for both development and runtime errors
 
 ## Contributing
 

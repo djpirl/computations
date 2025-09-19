@@ -1,7 +1,7 @@
 # Claude Integration Guide
 
 ## Project Overview
-Natural language to TypeScript computation generator with test case preview and CSV dataset application.
+Interactive natural language to TypeScript computation generator with real-time code editing, test case validation, and live execution feedback.
 
 ## Key Context for Claude
 
@@ -67,8 +67,55 @@ function sumSalesByCategory(rows: Array<{ category: string; sales: number }>): R
   SPEC.md         - Full specification
 ```
 
+## Current Implementation Status ✅
+
+### Core Features (Completed)
+- ✅ **Function Generation**: Claude API integration generates TypeScript functions from natural language
+- ✅ **Interactive Code Editor**: Monaco editor with TypeScript syntax highlighting and real-time editing
+- ✅ **Editable Test Cases**: JSON-validated input/output fields with inline error feedback
+- ✅ **Live Execution**: Real-time function execution with TypeScript-to-JavaScript conversion
+- ✅ **Test Validation**: Pass/fail indicators with actual vs expected result comparison
+- ✅ **Error Handling**: Comprehensive error handling for JSON parsing and function execution
+- ✅ **Development Environment**: Hot-reload development server with client/server separation
+
+### Architecture Overview
+
+#### Client (React + Vite + TypeScript)
+- **Port**: 3001 (auto-detects if 3000 is in use)
+- **Monaco Editor**: Editable TypeScript code with syntax highlighting
+- **Real-time Execution**: Functions execute 500ms after code/test changes (debounced)
+- **TypeScript Stripping**: Intelligent regex-based type annotation removal for browser execution
+- **JSON Validation**: Real-time JSON parsing with visual error feedback
+
+#### Server (Express + TypeScript)
+- **Port**: 9999 
+- **Claude API**: Sonnet 4 integration for function generation
+- **JSON Response Parsing**: Robust handling of Claude's markdown-wrapped responses
+- **Type Safety**: Shared types between client and server
+
+#### Key Technical Solutions
+1. **TypeScript Execution**: Browser-compatible execution by stripping type annotations
+2. **JSON Robustness**: Replaces `undefined` with `null` for valid JSON
+3. **Real-time Updates**: Debounced execution prevents excessive API calls
+4. **Error Isolation**: Invalid test cases don't break other test execution
+
+### API Endpoints
+- `POST /api/generate` - Generate function from natural language prompt
+- `GET /health` - Server health check
+
+### Development Workflow
+```bash
+npm run dev          # Start both client (3001) and server (9999)
+npm run client:dev   # Client only
+npm run server:dev   # Server only
+```
+
 ## API Key Setup
 Store Claude API key in `.env` file:
 ```
 CLAUDE_API_KEY=your_key_here
 ```
+
+## Repository
+- **GitHub**: https://github.com/djpirl/computations
+- **Commits**: Track progress and implementation history
