@@ -1,0 +1,13 @@
+product_id,name,category,price,supplier,in_stock,weight_kg,color
+101,Wireless Mouse,Electronics,29.99,TechCorp,true,0.1,Black
+102,Programming Guide,Books,49.99,BookPress,true,0.8,N/A
+103,Mechanical Keyboard,Electronics,79.99,TechCorp,true,1.2,Silver
+104,Table Lamp,Home,24.99,HomeGoods,true,2.5,White
+105,Fiction Novel,Books,12.99,BookPress,true,0.3,N/A
+106,Coffee Mug,Home,39.99,KitchenPlus,true,0.4,Blue
+107,Gaming Headset,Electronics,89.99,TechCorp,false,0.6,Black
+108,Cookbook,Books,15.99,BookPress,true,0.5,N/A
+109,Smartphone,Electronics,199.99,MobileTech,true,0.2,Space Gray
+110,Throw Pillow,Home,34.99,HomeGoods,true,0.3,Red
+111,Tablet,Electronics,64.99,TechCorp,true,0.5,White
+112,Laptop Stand,Electronics,129.99,TechCorp,true,3.2,Aluminum

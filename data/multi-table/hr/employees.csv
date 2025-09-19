@@ -1,0 +1,16 @@
+employee_id,first_name,last_name,email,department_id,position,hire_date,salary,manager_id,status
+E001,Alice,Johnson,alice.johnson@company.com,1,Sales Rep,2023-03-15,55000,E005,active
+E002,Bob,Smith,bob.smith@company.com,1,Sales Rep,2023-04-01,52000,E005,active
+E003,Carol,Brown,carol.brown@company.com,1,Senior Sales Rep,2023-02-10,65000,E005,active
+E004,David,Wilson,david.wilson@company.com,1,Sales Rep,2023-05-20,54000,E005,active
+E005,Mark,Thompson,mark.thompson@company.com,1,Sales Manager,2022-01-15,85000,E013,active
+E006,Linda,Davis,linda.davis@company.com,2,Marketing Specialist,2023-06-01,48000,E007,active
+E007,Sarah,Miller,sarah.miller@company.com,2,Marketing Manager,2022-09-10,72000,E013,active
+E008,John,Garcia,john.garcia@company.com,3,Software Developer,2023-01-20,75000,E009,active
+E009,Maria,Rodriguez,maria.rodriguez@company.com,3,IT Manager,2022-05-15,95000,E013,active
+E010,Robert,Wilson,robert.wilson@company.com,4,HR Specialist,2023-07-01,50000,E011,active
+E011,Jennifer,Taylor,jennifer.taylor@company.com,4,HR Manager,2022-08-20,68000,E013,active
+E012,Michael,Anderson,michael.anderson@company.com,5,Financial Analyst,2023-03-01,62000,E014,active
+E013,James,Executive,james.executive@company.com,6,CEO,2020-01-01,150000,null,active
+E014,Lisa,Thomas,lisa.thomas@company.com,5,Finance Manager,2022-06-30,82000,E013,active
+E015,Tom,Garcia,tom.garcia@company.com,3,Junior Developer,2023-08-15,58000,E009,active

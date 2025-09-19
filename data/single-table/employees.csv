@@ -1,0 +1,15 @@
+employee_id,first_name,last_name,department,position,salary,hire_date,manager_id,region,performance_rating
+201,Alice,Johnson,Sales,Sales Representative,55000,2023-03-15,205,North,4.2
+202,Bob,Smith,Sales,Sales Representative,52000,2023-04-01,205,South,3.8
+203,Carol,Brown,Sales,Sales Representative,58000,2023-02-10,205,East,4.5
+204,David,Wilson,Sales,Sales Representative,54000,2023-05-20,205,West,4.1
+205,Mark,Thompson,Sales,Sales Manager,85000,2022-01-15,301,North,4.7
+206,Linda,Davis,Marketing,Marketing Specialist,48000,2023-06-01,207,North,3.9
+207,Sarah,Miller,Marketing,Marketing Manager,72000,2022-09-10,301,North,4.4
+208,John,Garcia,IT,Software Developer,75000,2023-01-20,209,North,4.3
+209,Maria,Rodriguez,IT,IT Manager,95000,2022-05-15,301,North,4.6
+210,Robert,Wilson,HR,HR Specialist,50000,2023-07-01,211,North,4.0
+211,Jennifer,Taylor,HR,HR Manager,68000,2022-08-20,301,North,4.2
+212,Michael,Anderson,Finance,Financial Analyst,62000,2023-03-01,213,North,4.1
+213,Lisa,Thomas,Finance,Finance Manager,82000,2022-06-30,301,North,4.5
+301,James,Executive,Executive,CEO,150000,2020-01-01,null,North,4.8

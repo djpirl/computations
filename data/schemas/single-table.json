@@ -1,0 +1,83 @@
+{
+  "sales": {
+    "description": "Sales transaction records with product, customer, and regional information",
+    "columns": {
+      "id": { "type": "number", "description": "Unique transaction ID" },
+      "date": { "type": "string", "description": "Transaction date (YYYY-MM-DD)" },
+      "product_id": { "type": "number", "description": "Product identifier" },
+      "customer_id": { "type": "number", "description": "Customer identifier" },
+      "quantity": { "type": "number", "description": "Quantity sold" },
+      "price": { "type": "number", "description": "Unit price" },
+      "category": { "type": "string", "description": "Product category" },
+      "region": { "type": "string", "description": "Sales region" },
+      "sales_rep": { "type": "string", "description": "Sales representative name" }
+    },
+    "sample_aggregations": [
+      "Total sales by category",
+      "Average order value by region",
+      "Sales performance by representative",
+      "Monthly revenue trends"
+    ]
+  },
+  "products": {
+    "description": "Product catalog with pricing and inventory information",
+    "columns": {
+      "product_id": { "type": "number", "description": "Unique product identifier" },
+      "name": { "type": "string", "description": "Product name" },
+      "category": { "type": "string", "description": "Product category" },
+      "price": { "type": "number", "description": "Current price" },
+      "supplier": { "type": "string", "description": "Supplier name" },
+      "in_stock": { "type": "boolean", "description": "Inventory availability" },
+      "weight_kg": { "type": "number", "description": "Product weight in kg" },
+      "color": { "type": "string", "description": "Product color" }
+    },
+    "sample_aggregations": [
+      "Average price by category",
+      "Stock status summary",
+      "Product count by supplier",
+      "Weight distribution analysis"
+    ]
+  },
+  "customers": {
+    "description": "Customer demographics and purchase history",
+    "columns": {
+      "customer_id": { "type": "number", "description": "Unique customer identifier" },
+      "first_name": { "type": "string", "description": "Customer first name" },
+      "last_name": { "type": "string", "description": "Customer last name" },
+      "email": { "type": "string", "description": "Email address" },
+      "age": { "type": "number", "description": "Customer age" },
+      "city": { "type": "string", "description": "Customer city" },
+      "state": { "type": "string", "description": "Customer state" },
+      "signup_date": { "type": "string", "description": "Registration date" },
+      "total_orders": { "type": "number", "description": "Total number of orders" },
+      "lifetime_value": { "type": "number", "description": "Total customer value" }
+    },
+    "sample_aggregations": [
+      "Customer segmentation by age groups",
+      "Geographic distribution analysis",
+      "Lifetime value statistics",
+      "Customer acquisition trends"
+    ]
+  },
+  "employees": {
+    "description": "Employee records with department and performance data",
+    "columns": {
+      "employee_id": { "type": "number", "description": "Unique employee identifier" },
+      "first_name": { "type": "string", "description": "Employee first name" },
+      "last_name": { "type": "string", "description": "Employee last name" },
+      "department": { "type": "string", "description": "Department name" },
+      "position": { "type": "string", "description": "Job position" },
+      "salary": { "type": "number", "description": "Annual salary" },
+      "hire_date": { "type": "string", "description": "Hire date" },
+      "manager_id": { "type": "number", "description": "Manager employee ID" },
+      "region": { "type": "string", "description": "Work region" },
+      "performance_rating": { "type": "number", "description": "Performance rating (1-5)" }
+    },
+    "sample_aggregations": [
+      "Salary statistics by department",
+      "Employee tenure analysis",
+      "Performance rating distribution",
+      "Organizational hierarchy mapping"
+    ]
+  }
+}

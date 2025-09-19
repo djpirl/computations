@@ -1,0 +1,16 @@
+order_id,customer_id,order_date,total_amount,status,shipping_address,payment_method
+1001,501,2024-01-15,159.97,completed,"123 Main St, Seattle WA",credit_card
+1002,502,2024-01-16,49.99,pending,"456 Oak Ave, Austin TX",paypal
+1003,503,2024-01-16,224.96,completed,"789 Pine Rd, Denver CO",credit_card
+1004,501,2024-01-17,79.99,completed,"123 Main St, Seattle WA",credit_card
+1005,504,2024-01-17,104.97,shipped,"321 Elm St, Phoenix AZ",debit_card
+1006,505,2024-01-18,189.98,completed,"654 Maple Dr, Portland OR",credit_card
+1007,502,2024-01-18,25.98,cancelled,"456 Oak Ave, Austin TX",paypal
+1008,506,2024-01-19,319.95,completed,"987 Cedar Ln, Boston MA",credit_card
+1009,503,2024-01-19,64.99,shipped,"789 Pine Rd, Denver CO",credit_card
+1010,507,2024-01-20,149.98,completed,"147 Birch St, Miami FL",credit_card
+1011,508,2024-01-20,89.99,pending,"258 Spruce Ave, Chicago IL",paypal
+1012,504,2024-01-21,199.99,completed,"321 Elm St, Phoenix AZ",debit_card
+1013,509,2024-01-21,274.97,shipped,"369 Willow Rd, San Francisco CA",credit_card
+1014,510,2024-01-22,119.98,completed,"741 Poplar St, New York NY",credit_card
+1015,505,2024-01-22,39.99,completed,"654 Maple Dr, Portland OR",credit_card

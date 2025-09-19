@@ -1,0 +1,16 @@
+customer_id,first_name,last_name,email,age,city,state,signup_date,total_orders,lifetime_value
+1001,John,Smith,john.smith@email.com,32,Seattle,WA,2023-06-15,8,420.85
+1002,Sarah,Johnson,sarah.j@email.com,28,Austin,TX,2023-07-22,5,198.94
+1003,Mike,Brown,mike.brown@email.com,45,Denver,CO,2023-05-10,12,756.32
+1004,Emily,Davis,emily.davis@email.com,35,Phoenix,AZ,2023-08-03,6,284.17
+1005,Chris,Wilson,chris.w@email.com,29,Portland,OR,2023-09-12,3,125.47
+1006,Jessica,Miller,jessica.miller@email.com,41,Boston,MA,2023-04-18,9,523.78
+1007,David,Garcia,david.garcia@email.com,38,Miami,FL,2023-06-30,7,389.65
+1008,Lisa,Martinez,lisa.martinez@email.com,33,Chicago,IL,2023-07-08,4,167.23
+1009,Ryan,Anderson,ryan.anderson@email.com,42,San Francisco,CA,2023-05-25,11,634.91
+1010,Amanda,Taylor,amanda.taylor@email.com,26,New York,NY,2023-08-17,5,215.78
+1011,Kevin,Thomas,kevin.thomas@email.com,37,Nashville,TN,2023-09-05,3,98.47
+1012,Rachel,Jackson,rachel.jackson@email.com,30,Atlanta,GA,2023-06-02,6,312.56
+1013,Brandon,White,brandon.white@email.com,34,Las Vegas,NV,2023-07-14,4,189.73
+1014,Nicole,Harris,nicole.harris@email.com,39,Minneapolis,MN,2023-08-28,7,445.82
+1015,Justin,Martin,justin.martin@email.com,31,San Diego,CA,2023-09-20,2,87.94

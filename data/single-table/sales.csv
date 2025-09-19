@@ -1,0 +1,21 @@
+id,date,product_id,customer_id,quantity,price,category,region,sales_rep
+1,2024-01-15,101,1001,2,29.99,Electronics,North,Alice Johnson
+2,2024-01-15,102,1002,1,49.99,Books,South,Bob Smith
+3,2024-01-16,101,1003,3,29.99,Electronics,North,Alice Johnson
+4,2024-01-16,103,1001,1,79.99,Electronics,East,Carol Brown
+5,2024-01-17,104,1004,2,24.99,Home,West,David Wilson
+6,2024-01-17,102,1005,1,49.99,Books,South,Bob Smith
+7,2024-01-18,105,1002,4,12.99,Books,South,Bob Smith
+8,2024-01-18,101,1006,1,29.99,Electronics,North,Alice Johnson
+9,2024-01-19,106,1007,2,39.99,Home,West,David Wilson
+10,2024-01-19,107,1003,1,89.99,Electronics,East,Carol Brown
+11,2024-01-20,104,1008,3,24.99,Home,West,David Wilson
+12,2024-01-20,108,1009,1,15.99,Books,South,Bob Smith
+13,2024-01-21,103,1010,2,79.99,Electronics,East,Carol Brown
+14,2024-01-21,109,1001,1,199.99,Electronics,North,Alice Johnson
+15,2024-01-22,110,1011,1,34.99,Home,West,David Wilson
+16,2024-01-22,102,1012,2,49.99,Books,South,Bob Smith
+17,2024-01-23,111,1004,1,64.99,Electronics,North,Alice Johnson
+18,2024-01-23,106,1013,3,39.99,Home,West,David Wilson
+19,2024-01-24,112,1014,1,129.99,Electronics,East,Carol Brown
+20,2024-01-24,104,1015,2,24.99,Home,West,David Wilson

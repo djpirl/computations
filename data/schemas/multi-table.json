@@ -1,0 +1,135 @@
+{
+  "ecommerce": {
+    "description": "E-commerce order management system with related tables",
+    "tables": {
+      "orders": {
+        "primary_key": "order_id",
+        "description": "Customer order records",
+        "relationships": [
+          {
+            "table": "customers",
+            "type": "many-to-one",
+            "foreign_key": "customer_id",
+            "reference_key": "customer_id"
+          },
+          {
+            "table": "order_items",
+            "type": "one-to-many",
+            "foreign_key": "order_id",
+            "reference_key": "order_id"
+          }
+        ]
+      },
+      "order_items": {
+        "primary_key": "item_id",
+        "description": "Individual items within orders",
+        "relationships": [
+          {
+            "table": "orders",
+            "type": "many-to-one",
+            "foreign_key": "order_id",
+            "reference_key": "order_id"
+          },
+          {
+            "table": "products",
+            "type": "many-to-one",
+            "foreign_key": "product_id",
+            "reference_key": "product_id"
+          }
+        ]
+      },
+      "products": {
+        "primary_key": "product_id",
+        "description": "Product catalog with supplier information",
+        "relationships": [
+          {
+            "table": "order_items",
+            "type": "one-to-many",
+            "foreign_key": "product_id",
+            "reference_key": "product_id"
+          }
+        ]
+      },
+      "customers": {
+        "primary_key": "customer_id",
+        "description": "Customer profiles and preferences",
+        "relationships": [
+          {
+            "table": "orders",
+            "type": "one-to-many",
+            "foreign_key": "customer_id",
+            "reference_key": "customer_id"
+          }
+        ]
+      }
+    },
+    "sample_computations": [
+      "Customer order history with product details",
+      "Revenue analysis by product category and customer tier",
+      "Average order value by customer segment",
+      "Product performance metrics with customer feedback",
+      "Monthly cohort analysis with retention rates"
+    ]
+  },
+  "hr": {
+    "description": "Human resources management system",
+    "tables": {
+      "employees": {
+        "primary_key": "employee_id",
+        "description": "Employee master records",
+        "relationships": [
+          {
+            "table": "departments",
+            "type": "many-to-one",
+            "foreign_key": "department_id",
+            "reference_key": "department_id"
+          },
+          {
+            "table": "salaries",
+            "type": "one-to-many",
+            "foreign_key": "employee_id",
+            "reference_key": "employee_id"
+          },
+          {
+            "table": "employees",
+            "type": "many-to-one",
+            "foreign_key": "manager_id",
+            "reference_key": "employee_id",
+            "description": "Self-referencing manager relationship"
+          }
+        ]
+      },
+      "departments": {
+        "primary_key": "department_id",
+        "description": "Department information and budgets",
+        "relationships": [
+          {
+            "table": "employees",
+            "type": "one-to-many",
+            "foreign_key": "department_id",
+            "reference_key": "department_id"
+          }
+        ]
+      },
+      "salaries": {
+        "primary_key": "salary_id",
+        "description": "Salary history and performance records",
+        "relationships": [
+          {
+            "table": "employees",
+            "type": "many-to-one",
+            "foreign_key": "employee_id",
+            "reference_key": "employee_id"
+          }
+        ]
+      }
+    },
+    "sample_computations": [
+      "Department salary analysis with budget utilization",
+      "Employee hierarchy with reporting relationships",
+      "Performance-based compensation analysis",
+      "Salary history and progression tracking",
+      "Department headcount and cost analysis"
+    ]
+  }
+}
